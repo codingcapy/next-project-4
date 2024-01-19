@@ -15,10 +15,11 @@ export default async function Header() {
             <div>
                 <Link href={"/"} className="px-5">CapyNext</Link>
                 <Link href={"/"} className="px-5">Home</Link>
-            </div>
-            <div>
                 <Link href={"/posts"} className="px-5">Posts</Link>
             </div>
+            {session && <div>
+            <Link href={"/posts/create"} className="px-5">Create Post</Link>
+            </div>}
             <div>
                 {!session && <Link href={"/api/auth/signin"} className="px-5">Login</Link>}
                 {!session && <Link href={"/users/signup"} className="px-5">Sign up</Link>}

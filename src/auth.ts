@@ -27,34 +27,28 @@ export const authConfig = {
                 }
                 const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
                 if (!passwordsMatch) return null
-                console.log("user is")
-                // console.log(user)
                 return user
             },
         }
     )],
     callbacks: {
         async jwt({ token, user }) {
-            console.log("HEYYYYY")
-            console.log(token);
-            console.log("COOOOL")
-            console.log(user)
             if (user) {
                 token.id = user.id
                 //@ts-ignore
                 token.username = user.username;
+                //@ts-ignore
+                token.userId = user.userId;
             }
             return token
         },
         async session({ session, token }) {
-            console.log("LOOK HERE!!")
-            console.log(session)
-            console.log("LOOK ALSOOO HERE!!")
-            console.log(token);
             //@ts-ignore
             session.user.id = token.id
             //@ts-ignore
             session.user.username = token.username
+            //@ts-ignore
+            session.user.userId = token.userId
             return session
         },
     },
